@@ -45,6 +45,7 @@ func main() {
 
 	V, E = scanInt(), scanInt()
 
+	// Map을 사용하면 버텍스에서 연결된 버텍스를 바로 탐색가능
 	Graph := make(map[int][]Edge, V+1)
 
 	for i := 0; i < E; i++ {
@@ -57,6 +58,7 @@ func main() {
 	fmt.Fprintln(bw, Dijkstra(Graph, start)[end])
 }
 
+// 시작버텍스 start에서 시작하는 다익스트라 알고리즘
 func Dijkstra(graph map[int][]Edge, start int) []int {
 
 	visited := make([]bool, V+1)
@@ -66,6 +68,7 @@ func Dijkstra(graph map[int][]Edge, start int) []int {
 	}
 	distance[start] = 0
 
+	// 우선순위큐 초기화
 	pq := &EdgeHeap{}
 	heap.Init(pq)
 	heap.Push(pq, &Edge{start, 0})
@@ -78,16 +81,19 @@ func Dijkstra(graph map[int][]Edge, start int) []int {
 		}
 		visited[vertex] = true
 
+		// 현재 버텍스(최소 비용 버텍스)에 연결된 버텍스들을 모두 탐색
 		for i := 0; i < len(graph[vertex]); i++ {
 			edge := graph[vertex][i]
 			nextVtx := edge.vtx
 			nextCost := edge.cost
-
 			newCost := distance[vertex] + nextCost
 
+			// 방문한 버텍스면 무시한다.
 			if visited[nextVtx] {
 				continue
 			}
+
+			// 새로운 route의 cost가 현재 저장된 cost보다 작으면 새로운 cost로 업데이트
 			if distance[nextVtx] >= newCost {
 				distance[nextVtx] = newCost
 				heap.Push(pq, &Edge{nextVtx, distance[nextVtx]})
