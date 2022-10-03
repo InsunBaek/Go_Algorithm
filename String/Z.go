@@ -25,7 +25,6 @@ func ZArray(str string) []int {
 	Z[0] = n
 
 	for i := 1; i < n; i++ {
-
 		// case 1 -> (i > r)
 		if i > r {
 			l = i
