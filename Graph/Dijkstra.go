@@ -54,7 +54,6 @@ func main() {
 	}
 
 	start, end := scanInt(), scanInt()
-
 	fmt.Fprintln(bw, Dijkstra(Graph, start)[end])
 }
 
