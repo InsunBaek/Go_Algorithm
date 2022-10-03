@@ -58,6 +58,7 @@ func union(x_, y_ int) {
 // Collapsing Rule
 func find(node int) int {
 	var root, trail, front int
+	
 	// node(left)에서 출발해서 parent값이 음수인(뿌리)노드를 탐색
 	for root = node; parent[root] >= 0; {
 		root = parent[root]
